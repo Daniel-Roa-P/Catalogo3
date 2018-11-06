@@ -6,6 +6,7 @@
 package Builder;
 
 import AbstractFactory.Arco;
+import AbstractFactory.ArmaAbstracta;
 import AbstractFactory.Elfo;
 import AbstractFactory.EscudoElfo;
 import AbstractFactory.Reno;
@@ -16,14 +17,16 @@ import AbstractFactory.Reno;
  */
 public class ConstructorElfo extends Constructor {
 
-    Arco a=new Arco();
-    Reno r=new Reno();
-    EscudoElfo e=new EscudoElfo();
-    Elfo E=new Elfo();
+    
+    
     
     @Override
     public void construirPersonaje() {
-        
+       
+        arma=new Arco();
+        montura=new Reno();
+        escudo=new EscudoElfo();
+        apariencia=new Elfo();
         personaje=new Personaje();  
         
     }
@@ -31,27 +34,27 @@ public class ConstructorElfo extends Constructor {
     @Override
     public void construirArma() {
         
-        personaje.setArma(a.mostrar());
+        personaje.setArma(arma.mostrar());
         
     }
 
     @Override
     public void construirEscudo() {
         
-        personaje.setEscudo(e.mostrarEscudo());
+        personaje.setEscudo(escudo.mostrarEscudo());
                 
     }
 
     @Override
     public void construirMontura() {
         
-        personaje.setMontura(r.mostrarMontura());
+        personaje.setMontura(montura.mostrarMontura());
         
     }
 
     @Override
     public void construirApariencia() {
-        personaje.setAspecto(E.mostrarApariencia());
+        personaje.setAspecto(apariencia.mostrarApariencia());
     }
 
 }

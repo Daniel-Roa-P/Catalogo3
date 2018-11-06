@@ -1,9 +1,19 @@
 
 package Builder;
 
+import AbstractFactory.AparienciaAbstracta;
+import AbstractFactory.ArmaAbstracta;
+import AbstractFactory.EscudoAbstracto;
+import AbstractFactory.MonturaAbstracta;
+
 public abstract class Constructor {
  
     protected Personaje personaje;
+    protected ArmaAbstracta arma;
+    protected EscudoAbstracto escudo;
+    protected MonturaAbstracta montura;
+    protected AparienciaAbstracta apariencia;
+    
     
     public Personaje getPersonaje(){
         return personaje;

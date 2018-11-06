@@ -57,7 +57,10 @@ public class Catalogo extends JFrame implements ActionListener {
         Director D=new Director();
         Personaje P=new Personaje();
         String id;
- 
+        
+        boolean ar=false;
+        boolean es=false;
+        boolean mon=false;
         JPanel jpan;
         
     public static void main(String[] args) {
@@ -148,8 +151,6 @@ public class Catalogo extends JFrame implements ActionListener {
         nTropas.setBounds(250, 490, 100, 20);
 
     }
-    
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -189,16 +190,11 @@ public class Catalogo extends JFrame implements ActionListener {
             img4.setBounds(500,295,130,130);
             img4.setIcon(iconoEscalado4);
             
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getAspecto()));
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
             Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
             Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
             img5.setBounds(800,100,300,330);
             img5.setIcon(iconoEscalado5);
-            
-            P.setArma("vacio.png");
-            P.setAspecto("vacio.png");
-            P.setEscudo("vacio.png");
-            P.setMontura("vacio.png");
             
             img6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
             img7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
@@ -239,16 +235,11 @@ public class Catalogo extends JFrame implements ActionListener {
             img4.setBounds(500,295,130,130);
             img4.setIcon(iconoEscalado4);
             
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getAspecto()));
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
             Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
             Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
             img5.setBounds(800,100,300,330);
             img5.setIcon(iconoEscalado5);
-            
-            P.setArma("vacio.png");
-            P.setAspecto("vacio.png");
-            P.setEscudo("vacio.png");
-            P.setMontura("vacio.png");
             
             img6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
             img7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
@@ -290,16 +281,11 @@ public class Catalogo extends JFrame implements ActionListener {
             img4.setBounds(500,295,130,130);
             img4.setIcon(iconoEscalado4);
             
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getAspecto()));
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
             Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
             Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
             img5.setBounds(800,100,300,330);
             img5.setIcon(iconoEscalado5);
-            
-            P.setArma("vacio.png");
-            P.setAspecto("vacio.png");
-            P.setEscudo("vacio.png");
-            P.setMontura("vacio.png");
             
             img6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
             img7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
@@ -307,6 +293,7 @@ public class Catalogo extends JFrame implements ActionListener {
             
         } else if(e.getSource()==b4){
             
+            D.añadirArma();
             ImageIcon imgIcon6 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getArma()));
             Image imgEscalada6;
             Icon iconoEscalado6;
@@ -336,6 +323,7 @@ public class Catalogo extends JFrame implements ActionListener {
             
         } else if(e.getSource()==b5){
             
+            D.añadirMontura();
             ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getMontura()));
             Image imgEscalada8;
             Icon iconoEscalado8;
@@ -364,6 +352,8 @@ public class Catalogo extends JFrame implements ActionListener {
 }
             
         } else if(e.getSource()==b6){
+            
+            D.añadirEscudo();
             ImageIcon imgIcon7 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getEscudo()));
             Image imgEscalada7;
             Icon iconoEscalado7;

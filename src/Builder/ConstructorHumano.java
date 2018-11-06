@@ -16,14 +16,14 @@ import AbstractFactory.Humano;
  */
 public class ConstructorHumano extends Constructor{
     
-    Espada espada=new Espada();
-    Caballo caballo=new Caballo();
-    EscudoHumano escudo=new EscudoHumano();
-    Humano humano=new Humano();
+    
     
     @Override
     public void construirPersonaje() {
-        
+        arma=new Espada();
+        montura=new Caballo();
+        escudo=new EscudoHumano();
+        apariencia=new Humano();
         personaje=new Personaje();  
         
     }
@@ -31,7 +31,7 @@ public class ConstructorHumano extends Constructor{
     @Override
     public void construirArma() {
         
-        personaje.setArma(espada.mostrar());
+        personaje.setArma(arma.mostrar());
         
     }
 
@@ -45,13 +45,13 @@ public class ConstructorHumano extends Constructor{
     @Override
     public void construirMontura() {
         
-        personaje.setMontura(caballo.mostrarMontura());
+        personaje.setMontura(montura.mostrarMontura());
         
     }
 
     @Override
     public void construirApariencia() {
-        personaje.setAspecto(humano.mostrarApariencia());
+        personaje.setAspecto(apariencia.mostrarApariencia());
     }
     
 }

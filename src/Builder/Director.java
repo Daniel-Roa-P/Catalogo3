@@ -16,12 +16,20 @@ public class Director {
     }
     
     public void construirPersonaje(){
-        
         constructor.construirPersonaje();
-        constructor.construirArma();
-        constructor.construirMontura();
-        constructor.construirEscudo();
         constructor.construirApariencia();
+    }
+    
+    public void añadirArma(){
+        constructor.construirArma();
+    }
+    
+    public void añadirEscudo(){
+        constructor.construirEscudo();
+    }
+    
+    public void añadirMontura(){
+        constructor.construirMontura();
     }
     
 }
