@@ -6,7 +6,7 @@ Abstract Factory: Catálogo de personajes
 
 Diagrama Abstract Factory:
 
-![No ha sido encontrado el diagrama](https://github.com/DanielRoa20171020077/Catalogo2/blob/master/Catalogo.png)<br>
+![No ha sido encontrado el diagrama](https://github.com/DanielRoa20171020077/Catalogo3/blob/master/Catalogo.png)<br>
 
 Builder: Montar personaje
 
@@ -14,7 +14,7 @@ en este caso se hace uso del patron builder para montar los productos creados an
 
 Diagrama Builder:
 
-![No ha sido encontrado el diagrama](https://github.com/DanielRoa20171020077/Catalogo2/blob/master/DiagramaBuilder2.png)<br>
+![No ha sido encontrado el diagrama](https://github.com/DanielRoa20171020077/Catalogo3/blob/master/DiagramaBuilder2.png)<br>
 
 Prototype: Imprimir Tropas
 
@@ -22,4 +22,4 @@ una vez el usuario personaliza sus guerreros, este elige la cantidad de elfos, h
 
 Diagrama Prototype: 
 
-![No ha sido encontrado el diagrama](https://github.com/DanielRoa20171020077/Catalogo2/blob/master/prototype.png)<br>
+![No ha sido encontrado el diagrama](https://github.com/DanielRoa20171020077/Catalogo3/blob/master/prototype.png)<br>
