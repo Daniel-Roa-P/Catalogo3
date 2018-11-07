@@ -34,6 +34,7 @@ public class Catalogo extends JFrame implements ActionListener {
         JButton b5=new JButton("Añadir montura");
         JButton b6=new JButton("Añadir escudo");
         JButton b7=new JButton("Imprimir tropas");
+        JButton b8=new JButton("Iniciar Ataque");
         
         JLabel Arma=new JLabel("Arma");
         JLabel Montura=new JLabel("Montura");
@@ -57,10 +58,8 @@ public class Catalogo extends JFrame implements ActionListener {
         Director D=new Director();
         Personaje P=new Personaje();
         String id;
-        
-        boolean ar=false;
-        boolean es=false;
-        boolean mon=false;
+        int ntropas;
+                
         JPanel jpan;
         
     public static void main(String[] args) {
@@ -68,6 +67,7 @@ public class Catalogo extends JFrame implements ActionListener {
         Catalogo P=new Catalogo();
         P.setSize(1350, 730);
         P.setVisible(true);
+        
     }
     
     public Catalogo(){
@@ -89,6 +89,7 @@ public class Catalogo extends JFrame implements ActionListener {
         c.add(b5);
         c.add(b6);
         c.add(b7);
+        c.add(b8);
         c.add(Arma);
         c.add(Montura);
         c.add(Escudo);
@@ -112,7 +113,7 @@ public class Catalogo extends JFrame implements ActionListener {
         b5.addActionListener(this);
         b6.addActionListener(this);
         b7.addActionListener(this);
-        
+        b8.addActionListener(this);
         
         b.setBounds(130, 50, 100, 35);
         b.setBackground(Color.CYAN);
@@ -128,6 +129,8 @@ public class Catalogo extends JFrame implements ActionListener {
         b6.setBackground(Color.YELLOW);
         b7.setBounds(130, 580, 150, 30);
         b7.setBackground(Color.ORANGE);
+        b8.setBounds(130, 650, 150, 30);
+        b8.setBackground(Color.PINK);
         
         Arma.setBounds(300, 50, 100, 20);
         Arma.setForeground(Color.WHITE);
@@ -385,7 +388,8 @@ public class Catalogo extends JFrame implements ActionListener {
             Diseñador dis;
             jpan.setLayout(null);
             jpan.removeAll();
-            int ntropas=Integer.parseInt(nTropas.getText());  
+            
+            ntropas=Integer.parseInt(nTropas.getText());  
             int borde=13;
             int j = 0;
             int k = 0;
@@ -457,6 +461,12 @@ public class Catalogo extends JFrame implements ActionListener {
                  
             }
                 
+            
+        } else if(e.getSource()==b8){
+            
+            Juego J = new Juego();
+            
+            J.mostrar();
             
         }
     

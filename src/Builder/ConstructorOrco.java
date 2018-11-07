@@ -8,14 +8,12 @@ import AbstractFactory.Orco;
 
 public class ConstructorOrco extends Constructor {
 
-    
-    
     @Override
     public void construirPersonaje() {
-     arma=new Martillo();
-     montura=new Javali();
-     escudo=new EscudoOrco();
-     apariencia=new Orco();    
+        arma=new Martillo();
+        montura=new Javali();
+        escudo=new EscudoOrco();
+        apariencia=new Orco();    
         personaje=new Personaje();  
         
     }
