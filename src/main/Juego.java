@@ -50,7 +50,7 @@ public class Juego extends JFrame implements ActionListener{
         c.add(jpan);
         c.add(b1);
     }
-
+    
     public static void imprimir(){
         
         Timer timer=new Timer();
@@ -102,6 +102,23 @@ public class Juego extends JFrame implements ActionListener{
         
         if(e.getSource()==b1){
         
+           ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("/Imagenes/Borde.png"));
+                Image imgEscalada3 = imgIcon3.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+                Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
+                
+                for(int k=0;k<20;k++){
+                
+                    for(int j=0;j<10;j++){
+                    
+                    tropas[k][j]=new JLabel();
+                    tropas[k][j].setIcon(iconoEscalado3);
+                    jpan.add(tropas[k][j]);
+                    tropas[k][j].setBounds(50*k, 50*j, 50, 50);
+                    
+                    }
+                }
+
+                
            imprimir();
                 
         }
