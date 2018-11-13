@@ -117,13 +117,13 @@ public class Juego extends JFrame implements ActionListener{
             
             @Override
             public void run(){
-                    
+                
+                
                 for(int j=0;j<10;j++){
                     
                     if(tropas[i][j]!=null){
                         
-                        tropas[i+1][j]=new JLabel("a");
-//                        tropas[i+1][j]=tropas[i][j];
+                        tropas[i+1][j]=tropas[i][j];
                         jpan.add(tropas[i+1][j]);
                         tropas[i+1][j].setBounds(50+(50*i), 50+(50*j), 50, 50);
 
