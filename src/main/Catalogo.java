@@ -467,7 +467,7 @@ public class Catalogo extends JFrame implements ActionListener {
             Juego J = new Juego();
             
             J.mostrar();
-            
+//            J.pintar();
         }
     
     }
