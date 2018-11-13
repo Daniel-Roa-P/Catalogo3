@@ -19,6 +19,8 @@ import javax.swing.border.LineBorder;
 
 public class Juego extends JFrame implements ActionListener{
     
+    int totale=9;
+    
     static JPanel jpan;
     static int i=0;
     
@@ -27,8 +29,8 @@ public class Juego extends JFrame implements ActionListener{
     JButton b3 = new JButton("Ingresar Humano");
     JButton b4 = new JButton("Ingresar Orco");
     
-    JLabel personaje;
     JLabel matriz[][]=new JLabel[21][11];
+    JLabel muestraElfo[]=new JLabel[10];
     JLabel posX = new JLabel("posicion X:");
     JLabel posY = new JLabel("posicion Y:");
     JLabel elfos = new JLabel("Elfos restantes: 10");
@@ -40,6 +42,10 @@ public class Juego extends JFrame implements ActionListener{
     JTextField textoY=new JTextField();
     
     javax.swing.border.Border border = LineBorder.createBlackLineBorder();
+    
+    ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("/Imagenes/elfo2.png"));
+    Image imgEscalada2 = imgIcon2.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+    Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
     
     public void mostrar(){
         
@@ -96,7 +102,7 @@ public class Juego extends JFrame implements ActionListener{
         c.add(textoY);
     }
     
-    public static void imprimir(){
+    public static void correr(){
         
         Timer timer=new Timer();
                 
@@ -116,7 +122,7 @@ public class Juego extends JFrame implements ActionListener{
                     tropas[i][j]=new JLabel();
                     tropas[i][j].setIcon(iconoEscalado1);
                     jpan.add(tropas[i][j]);
-                    tropas[i][j].setBounds(50*i, 50*j, 50, 50);
+                    tropas[i][j].setBounds(50+(50*i), 50+(50*j), 50, 50);
                     
                     if(i>0){
                         
@@ -177,11 +183,37 @@ public class Juego extends JFrame implements ActionListener{
                 matriz[k][j].setBounds(50*k, 50*j, 50, 50);
                 
             }
-        } 
+            
+            
+        }
+        
+        for(int j=0;j<10;j++){
+                        
+            muestraElfo[j]=new JLabel();
+            muestraElfo[j].setIcon(iconoEscalado2);
+            jpan.add(muestraElfo[j]);
+            muestraElfo[j].setBounds(50+(5*j), 550, 50, 50);
+                    
+        }
+        } else if(e.getSource()==b2){
+            
+            int x=Integer.parseInt(textoX.getText())-1;
+            int y=Integer.parseInt(textoY.getText())-1;
+            
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/elfo2.png"));
+            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
+            tropas[x][y]=new JLabel();
+            tropas[x][y].setIcon(iconoEscalado5);
+            
+            jpan.add(tropas[x][y]);
+            tropas[x][y].setBounds(50+(50*x),50+(50*y),50,50);
+            jpan.remove(muestraElfo[totale]);
+            totale--;
+            jpan.repaint();
         }
         
     }
-    
 }
     
     
