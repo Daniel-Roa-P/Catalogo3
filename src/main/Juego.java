@@ -182,9 +182,7 @@ public class Juego extends JFrame implements ActionListener{
                 jpan.add(matriz[k][j]);
                 matriz[k][j].setBounds(50*k, 50*j, 50, 50);
                 
-            }
-            
-            
+            }           
         }
         
         for(int j=0;j<10;j++){
@@ -215,5 +213,3 @@ public class Juego extends JFrame implements ActionListener{
         
     }
 }
-    
-    
