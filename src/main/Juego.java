@@ -24,18 +24,19 @@ public class Juego extends JFrame implements ActionListener{
     static JPanel jpan;
     static int i=0;
     
-    JButton b1 = new JButton("Crear mapa");
+    JButton b1 = new JButton("Generar mapa");
     JButton b2 = new JButton("Ingresar elfo");
     JButton b3 = new JButton("Ingresar Humano");
     JButton b4 = new JButton("Ingresar Orco");
+    JButton b5 = new JButton("Atacar");
     
     JLabel matriz[][]=new JLabel[21][11];
     JLabel muestraElfo[]=new JLabel[10];
     JLabel posX = new JLabel("posicion X:");
     JLabel posY = new JLabel("posicion Y:");
-    JLabel elfos = new JLabel("Elfos restantes: 10");
-    JLabel humanos = new JLabel("Humanos restantes: 0");
-    JLabel orco = new JLabel("Orcos restantes: 0");
+    static JLabel elfos = new JLabel("Elfos restantes: 10");
+    static JLabel humanos = new JLabel("Humanos restantes: 0");
+    static JLabel orco = new JLabel("Orcos restantes: 0");
     static JLabel tropas[][]=new JLabel[20][10];
     
     JTextField textoX=new JTextField();
@@ -78,6 +79,9 @@ public class Juego extends JFrame implements ActionListener{
         b4.setBackground(Color.ORANGE);
         b4.setBounds(1100, 500, 170, 30);
         b4.addActionListener(this);
+        b5.setBackground(Color.RED);
+        b5.setBounds(1100, 560, 170, 30);
+        b5.addActionListener(this);
         
         posX.setBounds(1100, 330, 100, 20);
         posY.setBounds(1100, 370, 100, 20);
@@ -93,6 +97,7 @@ public class Juego extends JFrame implements ActionListener{
         c.add(b2);
         c.add(b3);
         c.add(b4);
+        c.add(b5);
         c.add(posX);
         c.add(posY);
         c.add(elfos);
@@ -112,34 +117,27 @@ public class Juego extends JFrame implements ActionListener{
             
             @Override
             public void run(){
-                
-                ImageIcon imgIcon1 = new ImageIcon(getClass().getResource("/Imagenes/elfo2.png"));
-                Image imgEscalada1 = imgIcon1.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
-                Icon iconoEscalado1 = new ImageIcon(imgEscalada1);
-                
-                    for(int j=0;j<10;j++){
-                        
-                    tropas[i][j]=new JLabel();
-                    tropas[i][j].setIcon(iconoEscalado1);
-                    jpan.add(tropas[i][j]);
-                    tropas[i][j].setBounds(50+(50*i), 50+(50*j), 50, 50);
                     
-                    if(i>0){
+                for(int j=0;j<10;j++){
+                    
+                    if(tropas[i][j]!=null){
                         
-                    jpan.remove(tropas[i-1][j]);
+                        tropas[i+1][j]=new JLabel("a");
+//                        tropas[i+1][j]=tropas[i][j];
+                        jpan.add(tropas[i+1][j]);
+                        tropas[i+1][j].setBounds(50+(50*i), 50+(50*j), 50, 50);
+
+                    
+                    }
                     jpan.repaint();
+                }    
                     
-                    }
-                    }    
-                    
-                    
-                    
-                    if(i<19){
-                        i++;
-                    } else {
-                        timer.cancel();
-                    }
-                    
+                if(i<18){
+                    i++;
+                } else {
+                    timer.cancel();
+                }
+                
             }
         };
      
@@ -209,7 +207,13 @@ public class Juego extends JFrame implements ActionListener{
             jpan.remove(muestraElfo[totale]);
             totale--;
             jpan.repaint();
+            
+        } else if(e.getSource()==b5){
+            
+            correr();
+            
         }
+        
         
     }
 }
