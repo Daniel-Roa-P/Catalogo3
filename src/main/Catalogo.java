@@ -58,7 +58,8 @@ public class Catalogo extends JFrame implements ActionListener {
         Director D=new Director();
         Personaje P=new Personaje();
         String id;
-        int ntropas;
+        int ntropas,per;
+        int cantidades[]={0,0,0};
                 
         JPanel jpan;
         
@@ -160,6 +161,7 @@ public class Catalogo extends JFrame implements ActionListener {
         
         if(e.getSource()==b){
         
+            per=0;
             id="elfo";
             
             FabricaPersonajes factory1 = new FabricaElfo();
@@ -206,6 +208,7 @@ public class Catalogo extends JFrame implements ActionListener {
         } else if(e.getSource()==b2){
         
             id="humano";
+            per=1;
             
             FabricaPersonajes factory2 = new FabricaHumano();
             Cliente c = new Cliente(factory2);
@@ -251,6 +254,7 @@ public class Catalogo extends JFrame implements ActionListener {
         } else if(e.getSource()==b3){
         
             id="orco";
+            per=2;
             
             FabricaPersonajes factory3 = new FabricaOrco();
             Cliente c = new Cliente(factory3);
@@ -389,7 +393,8 @@ public class Catalogo extends JFrame implements ActionListener {
             jpan.setLayout(null);
             jpan.removeAll();
             
-            ntropas=Integer.parseInt(nTropas.getText());  
+            ntropas=Integer.parseInt(nTropas.getText()); 
+            cantidades[per]=ntropas;
             int borde=13;
             int j = 0;
             int k = 0;
@@ -464,10 +469,10 @@ public class Catalogo extends JFrame implements ActionListener {
             
         } else if(e.getSource()==b8){
             
-            Juego J = new Juego();
+            Juego J = new Juego(cantidades[0],cantidades[1],cantidades[2]);
             
             J.mostrar();
-//            J.pintar();
+
         }
     
     }
