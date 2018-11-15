@@ -186,6 +186,7 @@ public class Catalogo extends JFrame implements ActionListener {
     }
 
     @Override
+        @SuppressWarnings("empty-statement")
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource()==b){
@@ -266,7 +267,12 @@ public class Catalogo extends JFrame implements ActionListener {
             
         } else if(e.getSource()==b7){
             
-            Diseñador dis;
+            Diseñador dis=new Diseñador(P);
+            PrototipoPersonajes prot;
+            prot=dis.retrievePersonaje(id);
+            
+            String armado=prot.getAspecto()+prot.getArma()+prot.getMontura()+prot.getEscudo()+".png";
+            
             jpan.setLayout(null);
             jpan.removeAll();
             
@@ -276,10 +282,8 @@ public class Catalogo extends JFrame implements ActionListener {
             int j = 0;
             int k = 0;
             int d = 0;
+          
             JLabel tropas[]=new JLabel[ntropas];
-            JLabel armas[]=new JLabel[ntropas];
-            JLabel escudos[]=new JLabel[ntropas];
-            JLabel monturas[]=new JLabel[ntropas];
             
             for(int l=0;l<ntropas;l++){
                 
@@ -297,44 +301,16 @@ public class Catalogo extends JFrame implements ActionListener {
                         j=j+1;
                         k=0;
                     }
-                
-                    dis=new Diseñador(P);
-                    PrototipoPersonajes prot;
-                    prot=dis.retrievePersonaje(id);
-                    
-                    ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getAspecto()+".png"));
+                                  
+                    ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("/Imagenes/"+armado));
                     Image imgEscalada9 = imgIcon9.getImage().getScaledInstance((int)60/d,(int)60/d, Image.SCALE_SMOOTH);
                     Icon iconoEscalado9 = new ImageIcon(imgEscalada9);
-                
-                    ImageIcon imgIcon10 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getArma()+".png"));
-                    Image imgEscalada10 = imgIcon10.getImage().getScaledInstance((int)30/d,(int)30/d, Image.SCALE_SMOOTH);
-                    Icon iconoEscalado10 = new ImageIcon(imgEscalada10);
-                    
-                    ImageIcon imgIcon11 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getEscudo()+".png"));
-                    Image imgEscalada11 = imgIcon11.getImage().getScaledInstance((int)25/d,(int)25/d, Image.SCALE_SMOOTH);
-                    Icon iconoEscalado11 = new ImageIcon(imgEscalada11);
-                    
-                    ImageIcon imgIcon12 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getMontura()+".png"));
-                    Image imgEscalada12 = imgIcon12.getImage().getScaledInstance((int)35/d,(int)35/d, Image.SCALE_SMOOTH);
-                    Icon iconoEscalado12 = new ImageIcon(imgEscalada12);
                     
                     tropas[i]=new JLabel();
                     tropas[i].setIcon(iconoEscalado9);
-                    armas[i]=new JLabel();
-                    armas[i].setIcon(iconoEscalado10);
-                    escudos[i]=new JLabel();
-                    escudos[i].setIcon(iconoEscalado11);
-                    monturas[i]=new JLabel();
-                    monturas[i].setIcon(iconoEscalado12);
-                    
-                    jpan.add(escudos[i]);
-                    escudos[i].setBounds((int)37/d+(k*70/d),(int)22/d+(int)(j*60/d), (int)25/d,(int)25/d);
+
                     jpan.add(tropas[i]);
                     tropas[i].setBounds(0+(k*70/d), 0+(int)(j*60/d), (int)60/d,(int)60/d);
-                    jpan.add(monturas[i]);
-                    monturas[i].setBounds((int)40/d+(k*70/d),(int)20/d+(int)(j*60/d), (int)35/d,(int)35/d);
-                    jpan.add(armas[i]);
-                    armas[i].setBounds(0+(k*70/d),(int)5/d+(int)(j*60/d), (int)30/d,(int)30/d);
                     
                     k++;
                     
