@@ -55,6 +55,9 @@ public class Catalogo extends JFrame implements ActionListener {
         static Catalogo catalogo;
         Director D=new Director();
         Personaje P=new Personaje();
+        Personaje Pe;
+        Personaje Ph;
+        Personaje Po;
         String id;
         int ntropas,per;
         int cantidades[]={0,0,0};
@@ -200,6 +203,7 @@ public class Catalogo extends JFrame implements ActionListener {
             D.setConstructor(new ConstructorElfo());
             D.construirPersonaje();
             P=D.getPersonaje();
+            Pe=D.getPersonaje();
             
             catalogo.pintar(c);
             
@@ -214,6 +218,7 @@ public class Catalogo extends JFrame implements ActionListener {
             D.setConstructor(new ConstructorHumano());
             D.construirPersonaje();
             P=D.getPersonaje();
+            Ph=D.getPersonaje();
             
             catalogo.pintar(c);
 
@@ -229,6 +234,7 @@ public class Catalogo extends JFrame implements ActionListener {
             D.construirPersonaje();
            
             P=D.getPersonaje();
+            Po=D.getPersonaje();
             
             catalogo.pintar(c);        
             
@@ -322,7 +328,7 @@ public class Catalogo extends JFrame implements ActionListener {
             
         } else if(e.getSource()==b8){
             
-            Juego J = new Juego(cantidades[0],cantidades[1],cantidades[2]);
+            Juego J = new Juego(cantidades[0],cantidades[1],cantidades[2],Pe,Ph,Po);
             
             J.mostrar();
 

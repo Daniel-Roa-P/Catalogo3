@@ -1,5 +1,6 @@
 package main;
 
+import Builder.Personaje;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Image;
@@ -19,9 +20,10 @@ import javax.swing.border.LineBorder;
 
 public class Juego extends JFrame implements ActionListener{
     
-    int totalElfos;
-    int totalHumanos;
-    int totalOrcos;
+    int totalElfos=0;
+    int totalHumanos=0;
+    int totalOrcos=0;
+    Personaje Pe,Ph,Po;
     
     static JPanel jpan;
     static int i=0;
@@ -48,32 +50,23 @@ public class Juego extends JFrame implements ActionListener{
     
     javax.swing.border.Border border = LineBorder.createBlackLineBorder();
     
-    ImageIcon imgIcon1 = new ImageIcon(getClass().getResource("/Imagenes/elfo2.png"));
-    Image imgEscalada1 = imgIcon1.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
-    Icon iconoEscalado1 = new ImageIcon(imgEscalada1);
-    
-    ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("/Imagenes/hombre2.png"));
-    Image imgEscalada2 = imgIcon2.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
-    Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
-    
-    ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("/Imagenes/cosaverde2.png"));
-    Image imgEscalada3 = imgIcon3.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
-    Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
-    
     public void mostrar(){
         
-        Juego J=new Juego(totalElfos,totalHumanos,totalOrcos);
+        Juego J=new Juego(totalElfos,totalHumanos,totalOrcos,Pe,Ph,Po);
         J.setSize(1300,700);
         J.setVisible(true);
            
     }
     
-    public Juego(int totalElfos,int totalHumanos,int totalOrcos){
+    public Juego(int totalElfos,int totalHumanos,int totalOrcos,Personaje Pe,Personaje Ph,Personaje Po){
         
         this.totalElfos=totalElfos;
         this.totalHumanos=totalHumanos;
         this.totalOrcos=totalOrcos;
-                
+        this.Pe=Pe;
+        this.Ph=Ph;
+        this.Po=Po;
+        
         Container c=getContentPane();
         c.setLayout(null);
         this.getContentPane().setBackground(new Color(37,119,25));
@@ -171,6 +164,18 @@ public class Juego extends JFrame implements ActionListener{
             muestraHumano=new JLabel[totalHumanos];
             muestraOrco=new JLabel[totalOrcos];
             
+            ImageIcon imgIcon1 = new ImageIcon(getClass().getResource("/Imagenes/"+Pe.getConjunto()+".png"));
+            Image imgEscalada1 = imgIcon1.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+            Icon iconoEscalado1 = new ImageIcon(imgEscalada1);
+    
+            ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("/Imagenes/"+Ph.getConjunto()+".png"));
+            Image imgEscalada2 = imgIcon2.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+            Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
+    
+            ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("/Imagenes/"+Po.getConjunto()+".png"));
+            Image imgEscalada3 = imgIcon3.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+            Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
+            
         for(int k=0;k<21;k++){
                 
             for(int j=0;j<11;j++){
@@ -223,10 +228,10 @@ public class Juego extends JFrame implements ActionListener{
         
         for(int j=0;j<totalOrcos;j++){
             
-            muestraHumano[j]=new JLabel();
-            muestraHumano[j].setIcon(iconoEscalado3);
-            jpan.add(muestraHumano[j]);
-            muestraHumano[j].setBounds(850+(5*j), 550, 50, 50);
+            muestraOrco[j]=new JLabel();
+            muestraOrco[j].setIcon(iconoEscalado3);
+            jpan.add(muestraOrco[j]);
+            muestraOrco[j].setBounds(850+(5*j), 550, 50, 50);
             
         }
         } else if(e.getSource()==b2){
@@ -234,7 +239,7 @@ public class Juego extends JFrame implements ActionListener{
             int x=Integer.parseInt(textoX.getText())-1;
             int y=Integer.parseInt(textoY.getText())-1;
             
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/elfo2.png"));
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+Pe.getConjunto()+".png"));
             Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
             Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
             
