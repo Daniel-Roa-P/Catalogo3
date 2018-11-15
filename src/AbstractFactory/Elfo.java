@@ -13,7 +13,7 @@ public class Elfo extends AparienciaAbstracta{
 
     @Override
     public String mostrarApariencia() {
-        return "elfo2.png";
+        return "elfo2";
     }
     
 }

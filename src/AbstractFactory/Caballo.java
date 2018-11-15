@@ -14,7 +14,7 @@ public class Caballo extends MonturaAbstracta{
     @Override
     public String mostrarMontura() {
         
-        return "caballodeguerra.png";
+        return "montura2";
         
     }
     

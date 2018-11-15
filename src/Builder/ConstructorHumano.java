@@ -20,11 +20,11 @@ public class ConstructorHumano extends Constructor{
     
     @Override
     public void construirPersonaje() {
+        
         arma=new Espada();
         montura=new Caballo();
         escudo=new EscudoHumano();
-        apariencia=new Humano();
-        personaje=new Personaje();  
+        apariencia=new Humano(); 
         
     }
 
@@ -32,26 +32,27 @@ public class ConstructorHumano extends Constructor{
     public void construirArma() {
         
         personaje.setArma(arma.mostrar());
-        
+        personaje.setConjunto();
     }
 
     @Override
     public void construirEscudo() {
         
         personaje.setEscudo(escudo.mostrarEscudo());
-                
+        personaje.setConjunto();        
     }
 
     @Override
     public void construirMontura() {
         
         personaje.setMontura(montura.mostrarMontura());
-        
+        personaje.setConjunto();
     }
 
     @Override
     public void construirApariencia() {
         personaje.setAspecto(apariencia.mostrarApariencia());
+        personaje.setConjunto();
     }
     
 }

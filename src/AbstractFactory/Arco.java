@@ -14,7 +14,7 @@ public class Arco extends ArmaAbstracta{
     @Override
     public String mostrar() {
         
-        return "arco.png";
+        return "arma1";
         
     }
     

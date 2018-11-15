@@ -3,10 +3,19 @@ package Builder;
 
 public class Personaje {
     
-    private String arma="vacio.png";
-    private String escudo="vacio.png";
-    private String montura="vacio.png";
-    private String aspecto="vacio.png";
+    private String arma="vacio";
+    private String escudo="vacio";
+    private String montura="vacio";
+    private String aspecto="";
+
+    public String getConjunto() {
+        return conjunto;
+    }
+
+    public void setConjunto() {
+        this.conjunto = aspecto+arma+montura+escudo;
+    }
+    private String conjunto;
     
     public void setArma(String Arma){
        this.arma=Arma; 

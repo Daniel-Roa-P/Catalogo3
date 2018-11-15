@@ -14,7 +14,7 @@ public class Orco extends AparienciaAbstracta{
     @Override
     public String mostrarApariencia() {
         
-        return "cosaverde2.png";
+        return "cosaverde2";
         
     }
     

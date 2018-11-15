@@ -51,10 +51,8 @@ public class Catalogo extends JFrame implements ActionListener {
         JLabel img3=new JLabel();
         JLabel img4=new JLabel();
         JLabel img5=new JLabel();
-        JLabel img6=new JLabel();
-        JLabel img7=new JLabel();
-        JLabel img8=new JLabel();
         
+        static Catalogo catalogo;
         Director D=new Director();
         Personaje P=new Personaje();
         String id;
@@ -65,9 +63,9 @@ public class Catalogo extends JFrame implements ActionListener {
         
     public static void main(String[] args) {
         
-        Catalogo P=new Catalogo();
-        P.setSize(1350, 730);
-        P.setVisible(true);
+        catalogo=new Catalogo();
+        catalogo.setSize(1350, 730);
+        catalogo.setVisible(true);
         
     }
     
@@ -102,10 +100,7 @@ public class Catalogo extends JFrame implements ActionListener {
         c.add(img2);
         c.add(img3);
         c.add(img4);
-        c.add(img7);
         c.add(img5);
-        c.add(img8);
-        c.add(img6);
         
         b.addActionListener(this);
         b2.addActionListener(this);
@@ -155,6 +150,40 @@ public class Catalogo extends JFrame implements ActionListener {
         nTropas.setBounds(250, 490, 100, 20);
 
     }
+    
+    private void pintar(Cliente c){
+        
+            ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirArma()+".png"));
+            Image imgEscalada = imgIcon.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
+            Icon iconoEscalado = new ImageIcon(imgEscalada);
+            img1.setBounds(300,80,130,130);
+            img1.setIcon(iconoEscalado);
+            
+            ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()+".png"));
+            Image imgEscalada2 = imgIcon2.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
+            Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
+            img2.setBounds(500,80,130,130);
+            img2.setIcon(iconoEscalado2);
+            
+            ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirEscudo()+".png"));
+            Image imgEscalada3 = imgIcon3.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
+            Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
+            img3.setBounds(300,295,130,130);
+            img3.setIcon(iconoEscalado3);
+            
+            ImageIcon imgIcon4 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirMontura()+".png"));
+            Image imgEscalada4 = imgIcon4.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
+            Icon iconoEscalado4 = new ImageIcon(imgEscalada4);
+            img4.setBounds(500,295,130,130);
+            img4.setIcon(iconoEscalado4);
+            
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()+".png"));
+            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
+            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
+            img5.setBounds(800,100,300,330);
+            img5.setIcon(iconoEscalado5);
+            
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -171,39 +200,7 @@ public class Catalogo extends JFrame implements ActionListener {
             D.construirPersonaje();
             P=D.getPersonaje();
             
-            ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirArma()));
-            Image imgEscalada = imgIcon.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado = new ImageIcon(imgEscalada);
-            img1.setBounds(300,80,130,130);
-            img1.setIcon(iconoEscalado);
-            
-            ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
-            Image imgEscalada2 = imgIcon2.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
-            img2.setBounds(500,80,130,130);
-            img2.setIcon(iconoEscalado2);
-            
-            ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirEscudo()));
-            Image imgEscalada3 = imgIcon3.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
-            img3.setBounds(300,295,130,130);
-            img3.setIcon(iconoEscalado3);
-            
-            ImageIcon imgIcon4 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirMontura()));
-            Image imgEscalada4 = imgIcon4.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado4 = new ImageIcon(imgEscalada4);
-            img4.setBounds(500,295,130,130);
-            img4.setIcon(iconoEscalado4);
-            
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
-            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
-            img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoEscalado5);
-            
-            img6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
-            img7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
-            img8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png"))); 
+            catalogo.pintar(c);
             
         } else if(e.getSource()==b2){
         
@@ -217,39 +214,7 @@ public class Catalogo extends JFrame implements ActionListener {
             D.construirPersonaje();
             P=D.getPersonaje();
             
-            ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirArma()));
-            Image imgEscalada = imgIcon.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado = new ImageIcon(imgEscalada);
-            img1.setBounds(300,80,130,130);
-            img1.setIcon(iconoEscalado);
-            
-            ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
-            Image imgEscalada2 = imgIcon2.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
-            img2.setBounds(500,80,130,130);
-            img2.setIcon(iconoEscalado2);
-            
-            ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirEscudo()));
-            Image imgEscalada3 = imgIcon3.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
-            img3.setBounds(300,295,130,130);
-            img3.setIcon(iconoEscalado3);
-            
-            ImageIcon imgIcon4 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirMontura()));
-            Image imgEscalada4 = imgIcon4.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado4 = new ImageIcon(imgEscalada4);
-            img4.setBounds(500,295,130,130);
-            img4.setIcon(iconoEscalado4);
-            
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
-            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
-            img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoEscalado5);
-            
-            img6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
-            img7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
-            img8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
+            catalogo.pintar(c);
 
         } else if(e.getSource()==b3){
         
@@ -264,129 +229,41 @@ public class Catalogo extends JFrame implements ActionListener {
            
             P=D.getPersonaje();
             
-            ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirArma()));
-            Image imgEscalada = imgIcon.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado = new ImageIcon(imgEscalada);
-            img1.setBounds(300,80,130,130);
-            img1.setIcon(iconoEscalado);
-            
-            ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
-            Image imgEscalada2 = imgIcon2.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
-            img2.setBounds(500,80,130,130);
-            img2.setIcon(iconoEscalado2);
-            
-            ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirEscudo()));
-            Image imgEscalada3 = imgIcon3.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
-            img3.setBounds(300,295,130,130);
-            img3.setIcon(iconoEscalado3);
-            
-            ImageIcon imgIcon4 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirMontura()));
-            Image imgEscalada4 = imgIcon4.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-            Icon iconoEscalado4 = new ImageIcon(imgEscalada4);
-            img4.setBounds(500,295,130,130);
-            img4.setIcon(iconoEscalado4);
-            
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()));
-            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
-            img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoEscalado5);
-            
-            img6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
-            img7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));
-            img8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vacio.png")));            
+            catalogo.pintar(c);        
             
         } else if(e.getSource()==b4){
             
             D.añadirArma();
-            ImageIcon imgIcon6 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getArma()));
-            Image imgEscalada6;
-            Icon iconoEscalado6;
             
-            if(null != id)switch (id) {
-                case "elfo":
-                    imgEscalada6 = imgIcon6.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-                    iconoEscalado6 = new ImageIcon(imgEscalada6);
-                    img6.setIcon(iconoEscalado6);
-                    img6.setBounds(850, 110, 130, 130);
-                    break;
-                case "humano":
-                    imgEscalada6 = imgIcon6.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-                    iconoEscalado6 = new ImageIcon(imgEscalada6);
-                    img6.setIcon(iconoEscalado6);
-                    img6.setBounds(850,130,130,130);
-                    break;
-                case "orco":
-                    imgEscalada6 = imgIcon6.getImage().getScaledInstance(170,170, Image.SCALE_SMOOTH);
-                    iconoEscalado6 = new ImageIcon(imgEscalada6);
-                    img6.setIcon(iconoEscalado6);
-                    img6.setBounds(770,100,170,170);
-                    break;
-                default:
-                    break;
-}
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
+            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
+            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
+            
+            img5.setBounds(800,100,300,330);
+            img5.setIcon(iconoEscalado5);
             
         } else if(e.getSource()==b5){
             
             D.añadirMontura();
-            ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getMontura()));
-            Image imgEscalada8;
-            Icon iconoEscalado8;
             
-            if(null != id)switch (id) {
-                case "elfo":
-                    imgEscalada8 = imgIcon8.getImage().getScaledInstance(250,220, Image.SCALE_SMOOTH);
-                    iconoEscalado8 = new ImageIcon(imgEscalada8);
-                    img8.setIcon(iconoEscalado8);
-                    img8.setBounds(1000, 210, 250, 220);
-                    break;
-                case "humano":
-                    imgEscalada8 = imgIcon8.getImage().getScaledInstance(250,220, Image.SCALE_SMOOTH);
-                    iconoEscalado8 = new ImageIcon(imgEscalada8);
-                    img8.setIcon(iconoEscalado8);
-                    img8.setBounds(950,170,250,220);
-                    break;
-                case "orco":
-                    imgEscalada8 = imgIcon8.getImage().getScaledInstance(250,200, Image.SCALE_SMOOTH);
-                    iconoEscalado8 = new ImageIcon(imgEscalada8);
-                    img8.setIcon(iconoEscalado8);
-                    img8.setBounds(1000,230,250,200);
-                    break;
-                default:
-                    break;
-}
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
+            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
+            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
+            
+            img5.setBounds(800,100,300,330);
+            img5.setIcon(iconoEscalado5);
             
         } else if(e.getSource()==b6){
             
             D.añadirEscudo();
-            ImageIcon imgIcon7 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getEscudo()));
-            Image imgEscalada7;
-            Icon iconoEscalado7;
             
-            if(null != id)switch (id) {
-                case "elfo":
-                    imgEscalada7 = imgIcon7.getImage().getScaledInstance(100,100, Image.SCALE_SMOOTH);
-                    iconoEscalado7 = new ImageIcon(imgEscalada7);
-                    img7.setIcon(iconoEscalado7);
-                    img7.setBounds(1010, 190, 130, 130);
-                    break;
-                case "humano":
-                    imgEscalada7 = imgIcon7.getImage().getScaledInstance(130,130, Image.SCALE_SMOOTH);
-                    iconoEscalado7 = new ImageIcon(imgEscalada7);
-                    img7.setIcon(iconoEscalado7);
-                    img7.setBounds(950,230,130,130);
-                    break;
-                case "orco":
-                    imgEscalada7 = imgIcon7.getImage().getScaledInstance(200,200, Image.SCALE_SMOOTH);
-                    iconoEscalado7 = new ImageIcon(imgEscalada7);
-                    img7.setIcon(iconoEscalado7);
-                    img7.setBounds(950,180,200,200);
-                    break;
-                default:
-                    break;
-            }
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
+            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
+            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
+            
+            img5.setBounds(800,100,300,330);
+            img5.setIcon(iconoEscalado5);
+            
         } else if(e.getSource()==b7){
             
             Diseñador dis;
@@ -425,19 +302,19 @@ public class Catalogo extends JFrame implements ActionListener {
                     PrototipoPersonajes prot;
                     prot=dis.retrievePersonaje(id);
                     
-                    ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getAspecto()));
+                    ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getAspecto()+".png"));
                     Image imgEscalada9 = imgIcon9.getImage().getScaledInstance((int)60/d,(int)60/d, Image.SCALE_SMOOTH);
                     Icon iconoEscalado9 = new ImageIcon(imgEscalada9);
                 
-                    ImageIcon imgIcon10 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getArma()));
+                    ImageIcon imgIcon10 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getArma()+".png"));
                     Image imgEscalada10 = imgIcon10.getImage().getScaledInstance((int)30/d,(int)30/d, Image.SCALE_SMOOTH);
                     Icon iconoEscalado10 = new ImageIcon(imgEscalada10);
                     
-                    ImageIcon imgIcon11 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getEscudo()));
+                    ImageIcon imgIcon11 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getEscudo()+".png"));
                     Image imgEscalada11 = imgIcon11.getImage().getScaledInstance((int)25/d,(int)25/d, Image.SCALE_SMOOTH);
                     Icon iconoEscalado11 = new ImageIcon(imgEscalada11);
                     
-                    ImageIcon imgIcon12 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getMontura()));
+                    ImageIcon imgIcon12 = new ImageIcon(getClass().getResource("/Imagenes/"+prot.getMontura()+".png"));
                     Image imgEscalada12 = imgIcon12.getImage().getScaledInstance((int)35/d,(int)35/d, Image.SCALE_SMOOTH);
                     Icon iconoEscalado12 = new ImageIcon(imgEscalada12);
                     

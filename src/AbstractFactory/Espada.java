@@ -14,7 +14,7 @@ public class Espada extends ArmaAbstracta{
     @Override
     public String mostrar() {
         
-        return "espadaHombre.png";
+        return "arma2";
         
     }
     

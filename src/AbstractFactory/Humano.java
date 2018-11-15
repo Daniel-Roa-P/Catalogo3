@@ -14,7 +14,7 @@ public class Humano extends AparienciaAbstracta {
     @Override
     public String mostrarApariencia() {
         
-        return "hombre2.png";
+        return "hombre2";
         
     }
     

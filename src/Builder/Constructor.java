@@ -8,7 +8,7 @@ import AbstractFactory.MonturaAbstracta;
 
 public abstract class Constructor {
  
-    protected Personaje personaje;
+    protected Personaje personaje=new Personaje();
     protected ArmaAbstracta arma;
     protected EscudoAbstracto escudo;
     protected MonturaAbstracta montura;
