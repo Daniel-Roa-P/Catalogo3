@@ -18,8 +18,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class Juego extends JFrame implements ActionListener{
-    
-    public int total,nElfos,nHumanos,nOrcos;
+
+    private int total;
+    private final int nElfos;
+    private final int nHumanos;
+    private final int nOrcos;
     
     private final JPanel jpan;
     private int i=0;
@@ -35,9 +38,9 @@ public class Juego extends JFrame implements ActionListener{
     private final JLabel posY = new JLabel("posicion Y:");
     private JLabel muestra[];
     
-    private Icon iconoElfo;
-    private Icon iconoHumano;
-    private Icon iconoOrco;
+    private final Icon iconoElfo;
+    private final Icon iconoHumano;
+    private final Icon iconoOrco;
     
     private final JLabel elfos = new JLabel("Elfos restantes: 10");
     private final JLabel humanos = new JLabel("Humanos restantes: 0");
@@ -51,13 +54,23 @@ public class Juego extends JFrame implements ActionListener{
     
     public void mostrar(){
         
-        Juego J=new Juego();
+        Juego J=new Juego( nElfos,  nHumanos, nOrcos, iconoElfo, iconoHumano, iconoOrco);
         J.setSize(1300,700);
         J.setVisible(true);
            
     }
     
-    public Juego(){
+    public Juego(int nElfos, int nHumanos, int nOrcos, Icon iconoElfo, Icon iconoHumano ,Icon iconoOrco){
+        
+        this.nElfos=nElfos;
+        this.nHumanos=nHumanos;
+        this.nOrcos=nOrcos;
+        
+        this.total=nElfos+nHumanos+nOrcos;
+        
+        this.iconoElfo=iconoElfo;
+        this.iconoHumano=iconoHumano;
+        this.iconoOrco=iconoOrco;
         
         Container c=getContentPane();
         c.setLayout(null);
@@ -147,37 +160,11 @@ public class Juego extends JFrame implements ActionListener{
            
     }
     
-    public void setTropas(int nElfos, int nHumanos, int nOrcos){
-        
-        this.nElfos=nElfos;
-        this.nHumanos=nHumanos;
-        this.nOrcos=nOrcos;
-        
-        System.out.println(nElfos);
-        System.out.println(nHumanos);
-        System.out.println(nOrcos);
-        
-    }
-    
-    public void setIconos(Icon iconoElfo,Icon iconoHumano,Icon iconoOrco){
-        
-        this.iconoElfo=iconoElfo;
-        this.iconoHumano=iconoHumano;
-        this.iconoOrco=iconoOrco;
-        
-    }
-    
     public void crearMuestras(){
-
-        total=nElfos+nHumanos+nOrcos;
-        System.out.println(nElfos);
-        System.out.println(nHumanos);
-        System.out.println(nOrcos);
+        
         muestra=new JLabel[total];
         
         for(int k=0;k<total;k++){
-        
-            System.out.println(k);
             
             if(k<nElfos){
                 
@@ -191,18 +178,20 @@ public class Juego extends JFrame implements ActionListener{
                 muestra[k]=new JLabel();
                 muestra[k].setIcon(iconoHumano);
                 jpan.add(muestra[k]);
-                muestra[k].setBounds(450+(5*k), 550, 50, 50);
+                muestra[k].setBounds(400+(5*k), 550, 50, 50);
                 
             } else if(k>=(nElfos+nHumanos) && k<(total)){
                
                 muestra[k]=new JLabel();
                 muestra[k].setIcon(iconoOrco);
                 jpan.add(muestra[k]);
-                muestra[k].setBounds(850+(5*k), 550, 50, 50);
+                muestra[k].setBounds(800+(5*k), 550, 50, 50);
                 
             }
             
         }
+        
+        jpan.repaint();
         
     }
     
@@ -242,7 +231,7 @@ public class Juego extends JFrame implements ActionListener{
                 
                 }           
             }
-            
+  
             crearMuestras();
             
         } else if(e.getSource()==b2){

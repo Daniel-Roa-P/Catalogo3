@@ -55,7 +55,7 @@ public class Catalogo extends JFrame implements ActionListener {
         private Icon iconoElfo;
         private Icon iconoHumano;
         private Icon iconoOrco;
-        
+
         private final JTextField cantidadElfos=new JTextField("10");
         private final JTextField cantidadHumanos=new JTextField("10");
         private final JTextField cantidadOrcos=new JTextField("10");
@@ -195,16 +195,32 @@ public class Catalogo extends JFrame implements ActionListener {
             img4.setBounds(500,295,130,130);
             img4.setIcon(iconoEscalado4);
             
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+c.recibirAspecto()+".png"));
-            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
-            img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoEscalado5);
+    }
+    
+    public void validarIcono(){
+       
+        ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
+        Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
+        Icon iconoEscalado5  = new ImageIcon(imgEscalada5);
             
+        img5.setBounds(800,100,300,330);
+        img5.setIcon(iconoEscalado5);
+        
+        ImageIcon imgIcon6 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
+        Image imgEscalada6 = imgIcon6.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+        Icon iconoEscalado6  = new ImageIcon(imgEscalada6);
+        
+        if(id.equals("elfo")){
+                iconoElfo=iconoEscalado6;
+            } else if(id.equals("humano")){
+                iconoHumano=iconoEscalado6;
+            } else if(id.equals("orco")){
+                iconoOrco=iconoEscalado6;
+            }
+        
     }
 
     @Override
-        @SuppressWarnings("empty-statement")
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource()==b){
@@ -220,6 +236,7 @@ public class Catalogo extends JFrame implements ActionListener {
             Pe=D.getPersonaje();
             
             pintar(c);
+            validarIcono();
             
         } else if(e.getSource()==b2){
         
@@ -234,7 +251,8 @@ public class Catalogo extends JFrame implements ActionListener {
             Ph=D.getPersonaje();
             
             pintar(c);
-
+            validarIcono();
+            
         } else if(e.getSource()==b3){
         
             id="orco";
@@ -249,39 +267,22 @@ public class Catalogo extends JFrame implements ActionListener {
             Po=D.getPersonaje();
             
             pintar(c);        
+            validarIcono();
             
         } else if(e.getSource()==b4){
             
             D.añadirArma();
-            
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
-            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            iconoElfo = new ImageIcon(imgEscalada5);
-            
-            img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoElfo);
+            validarIcono(); 
             
         } else if(e.getSource()==b5){
             
             D.añadirMontura();
-            
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
-            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            iconoHumano = new ImageIcon(imgEscalada5);
-            
-            img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoHumano);
+            validarIcono();  
             
         } else if(e.getSource()==b6){
             
             D.añadirEscudo();
-            
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
-            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            iconoOrco = new ImageIcon(imgEscalada5);
-            
-            img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoOrco);
+            validarIcono(); 
             
         } else if(e.getSource()==b7){
             
@@ -354,10 +355,8 @@ public class Catalogo extends JFrame implements ActionListener {
             
         } else if(e.getSource()==b8){
             
-            Juego J = new Juego();
+            Juego J = new Juego(nElfos, nHumanos, nOrcos, iconoElfo, iconoHumano, iconoOrco);
             J.mostrar();
-            J.setTropas(nElfos, nHumanos, nOrcos);
-            J.setIconos(iconoElfo, iconoHumano, iconoOrco);
             
         }
     
