@@ -52,9 +52,9 @@ public class Catalogo extends JFrame implements ActionListener {
         private final JLabel img4=new JLabel();
         private final JLabel img5=new JLabel();
         
-        private Icon iconoElfo;
-        private Icon iconoHumano;
-        private Icon iconoOrco;
+        public Icon iconoElfo;
+        public Icon iconoHumano;
+        public Icon iconoOrco;
 
         private final JTextField cantidadElfos=new JTextField("10");
         private final JTextField cantidadHumanos=new JTextField("10");
@@ -64,14 +64,16 @@ public class Catalogo extends JFrame implements ActionListener {
         private Personaje P=new Personaje();
         private Personaje Pe,Ph,Po;
         
-        private String id;
-        private int nElfos,nHumanos,nOrcos,ntropas;
-                
+        public String id;
+        public int nElfos,nHumanos,nOrcos,ntropas;
+         
+        public static Catalogo catalogo;
+        
         JPanel jpan;
         
     public static void main(String[] args) {
         
-        Catalogo catalogo=new Catalogo();
+        catalogo=new Catalogo();
         catalogo.setSize(1350, 730);
         catalogo.setVisible(true);
         
@@ -355,9 +357,8 @@ public class Catalogo extends JFrame implements ActionListener {
             
         } else if(e.getSource()==b8){
             
-            Juego J = new Juego(nElfos, nHumanos, nOrcos, iconoElfo, iconoHumano, iconoOrco);
+            Juego J = new Juego();
             J.mostrar();
-            
         }
     
     }
