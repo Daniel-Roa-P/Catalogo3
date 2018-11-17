@@ -27,46 +27,51 @@ import javax.swing.JTextField;
 
 public class Catalogo extends JFrame implements ActionListener {
 
-        JButton b=new JButton("Elfo");
-        JButton b2=new JButton("Humano");
-        JButton b3=new JButton("Orco");
-        JButton b4=new JButton("Añadir arma");
-        JButton b5=new JButton("Añadir montura");
-        JButton b6=new JButton("Añadir escudo");
-        JButton b7=new JButton("Imprimir tropas");
-        JButton b8=new JButton("Iniciar Ataque");
+        private final JButton b=new JButton("Elfo");
+        private final JButton b2=new JButton("Humano");
+        private final JButton b3=new JButton("Orco");
+        private final JButton b4=new JButton("Añadir arma");
+        private final JButton b5=new JButton("Añadir montura");
+        private final JButton b6=new JButton("Añadir escudo");
+        private final JButton b7=new JButton("Imprimir tropas");
+        private final JButton b8=new JButton("Iniciar Ataque");
         
-        JLabel Arma=new JLabel("Arma");
-        JLabel Montura=new JLabel("Montura");
-        JLabel Aspecto=new JLabel("Aspecto");
-        JLabel Escudo=new JLabel("Escudo");
-        JLabel Personaje=new JLabel("Personaje");
+        private final JLabel Arma=new JLabel("Arma");
+        private final JLabel Montura=new JLabel("Montura");
+        private final JLabel Aspecto=new JLabel("Aspecto");
+        private final JLabel Escudo=new JLabel("Escudo");
+        private final JLabel Personaje=new JLabel("Personaje");
+        private final JLabel Tropas=new JLabel("Tropas:");
+        private final JLabel Texto1=new JLabel("Numero Elfos:");
+        private final JLabel Texto2=new JLabel("Numero Humanos:");
+        private final JLabel Texto3=new JLabel("Numero Orcos:");
         
-        JLabel Tropas=new JLabel("Tropas:");
+        private final JLabel img1=new JLabel();
+        private final JLabel img2=new JLabel();
+        private final JLabel img3=new JLabel();
+        private final JLabel img4=new JLabel();
+        private final JLabel img5=new JLabel();
         
-        JTextField nTropas=new JTextField("10");
+        private Icon iconoElfo;
+        private Icon iconoHumano;
+        private Icon iconoOrco;
         
-        JLabel img1=new JLabel();
-        JLabel img2=new JLabel();
-        JLabel img3=new JLabel();
-        JLabel img4=new JLabel();
-        JLabel img5=new JLabel();
+        private final JTextField cantidadElfos=new JTextField("10");
+        private final JTextField cantidadHumanos=new JTextField("10");
+        private final JTextField cantidadOrcos=new JTextField("10");
         
-        static Catalogo catalogo;
-        Director D=new Director();
-        Personaje P=new Personaje();
-        Personaje Pe;
-        Personaje Ph;
-        Personaje Po;
-        String id;
-        int ntropas,per;
-        int cantidades[]={0,0,0};
+        private final Director D=new Director();
+        private Personaje P=new Personaje();
+        private Personaje Pe,Ph,Po;
+        
+        private String id;
+        private int nElfos,nHumanos,nOrcos,ntropas;
                 
         JPanel jpan;
         
     public static void main(String[] args) {
         
-        catalogo=new Catalogo();
+        Catalogo catalogo=new Catalogo();
         catalogo.setSize(1350, 730);
         catalogo.setVisible(true);
         
@@ -97,13 +102,17 @@ public class Catalogo extends JFrame implements ActionListener {
         c.add(Escudo);
         c.add(Aspecto);
         c.add(Personaje);
-        c.add(Tropas);
-        c.add(nTropas);
+        c.add(Texto1);
+        c.add(Texto2);
+        c.add(Texto3);
         c.add(img1);
         c.add(img2);
         c.add(img3);
         c.add(img4);
         c.add(img5);
+        c.add(cantidadElfos);
+        c.add(cantidadHumanos);
+        c.add(cantidadOrcos);
         
         b.addActionListener(this);
         b2.addActionListener(this);
@@ -148,10 +157,16 @@ public class Catalogo extends JFrame implements ActionListener {
         Personaje.setFont(new java.awt.Font("ALGERIAN", 1, 20));
         Personaje.setBackground(Color.cyan);
         
-        Tropas.setBounds(130, 490, 100, 20);
-        Tropas.setForeground(Color.BLACK);
-        nTropas.setBounds(250, 490, 100, 20);
-
+        Texto1.setBounds(130, 430, 150, 20);
+        Texto1.setForeground(Color.BLACK);
+        Texto2.setBounds(130, 480, 150, 20);
+        Texto2.setForeground(Color.BLACK);
+        Texto3.setBounds(130, 530, 150, 20);
+        Texto3.setForeground(Color.BLACK);
+        
+        cantidadElfos.setBounds(250, 430, 30, 20);
+        cantidadHumanos.setBounds(250, 480, 30, 20);
+        cantidadOrcos.setBounds(250, 530, 30, 20);
     }
     
     private void pintar(Cliente c){
@@ -194,7 +209,6 @@ public class Catalogo extends JFrame implements ActionListener {
         
         if(e.getSource()==b){
         
-            per=0;
             id="elfo";
             
             FabricaPersonajes factory1 = new FabricaElfo();
@@ -205,12 +219,11 @@ public class Catalogo extends JFrame implements ActionListener {
             P=D.getPersonaje();
             Pe=D.getPersonaje();
             
-            catalogo.pintar(c);
+            pintar(c);
             
         } else if(e.getSource()==b2){
         
             id="humano";
-            per=1;
             
             FabricaPersonajes factory2 = new FabricaHumano();
             Cliente c = new Cliente(factory2);
@@ -220,12 +233,11 @@ public class Catalogo extends JFrame implements ActionListener {
             P=D.getPersonaje();
             Ph=D.getPersonaje();
             
-            catalogo.pintar(c);
+            pintar(c);
 
         } else if(e.getSource()==b3){
         
             id="orco";
-            per=2;
             
             FabricaPersonajes factory3 = new FabricaOrco();
             Cliente c = new Cliente(factory3);
@@ -236,7 +248,7 @@ public class Catalogo extends JFrame implements ActionListener {
             P=D.getPersonaje();
             Po=D.getPersonaje();
             
-            catalogo.pintar(c);        
+            pintar(c);        
             
         } else if(e.getSource()==b4){
             
@@ -244,10 +256,10 @@ public class Catalogo extends JFrame implements ActionListener {
             
             ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
             Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
+            iconoElfo = new ImageIcon(imgEscalada5);
             
             img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoEscalado5);
+            img5.setIcon(iconoElfo);
             
         } else if(e.getSource()==b5){
             
@@ -255,10 +267,10 @@ public class Catalogo extends JFrame implements ActionListener {
             
             ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
             Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
+            iconoHumano = new ImageIcon(imgEscalada5);
             
             img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoEscalado5);
+            img5.setIcon(iconoHumano);
             
         } else if(e.getSource()==b6){
             
@@ -266,24 +278,24 @@ public class Catalogo extends JFrame implements ActionListener {
             
             ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+P.getConjunto()+".png"));
             Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(300,330, Image.SCALE_SMOOTH);
-            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
+            iconoOrco = new ImageIcon(imgEscalada5);
             
             img5.setBounds(800,100,300,330);
-            img5.setIcon(iconoEscalado5);
+            img5.setIcon(iconoOrco);
             
         } else if(e.getSource()==b7){
             
-            Diseñador dis=new Diseñador(P);
+            Diseñador dis = null;
             PrototipoPersonajes prot;
-            prot=dis.retrievePersonaje(id);
-            
-            String armado=prot.getAspecto()+prot.getArma()+prot.getMontura()+prot.getEscudo()+".png";
             
             jpan.setLayout(null);
             jpan.removeAll();
             
-            ntropas=Integer.parseInt(nTropas.getText()); 
-            cantidades[per]=ntropas;
+            nElfos=Integer.parseInt(cantidadElfos.getText());
+            nHumanos=Integer.parseInt(cantidadHumanos.getText());
+            nOrcos=Integer.parseInt(cantidadOrcos.getText());
+            
+            ntropas= nElfos+nHumanos+nOrcos; 
             int borde=13;
             int j = 0;
             int k = 0;
@@ -302,6 +314,21 @@ public class Catalogo extends JFrame implements ActionListener {
             }
             
             for(int i=0;i<ntropas;i++){
+                
+                if(i<nElfos){
+                    dis=new Diseñador(Pe);
+                    id="elfo";
+                } else if(i>=nElfos && i<(nElfos+nHumanos)) {
+                    dis=new Diseñador(Ph);
+                    id="humano";
+                } else if(i>=(nElfos+nHumanos) && i<(ntropas)){
+                    dis=new Diseñador(Po);
+                    id="orco";
+                }
+                
+                prot=dis.retrievePersonaje(id);
+            
+                String armado=prot.getAspecto()+prot.getArma()+prot.getMontura()+prot.getEscudo()+".png";
                 
                 if(i!=0 && i%borde==0){
                         j=j+1;
@@ -324,14 +351,14 @@ public class Catalogo extends JFrame implements ActionListener {
                 jpan.repaint();
                  
             }
-                
             
         } else if(e.getSource()==b8){
             
-            Juego J = new Juego(cantidades[0],cantidades[1],cantidades[2],Pe,Ph,Po);
-            
+            Juego J = new Juego();
             J.mostrar();
-
+            J.setTropas(nElfos, nHumanos, nOrcos);
+            J.setIconos(iconoElfo, iconoHumano, iconoOrco);
+            
         }
     
     }

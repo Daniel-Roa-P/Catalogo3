@@ -1,6 +1,5 @@
 package main;
 
-import Builder.Personaje;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Image;
@@ -20,52 +19,45 @@ import javax.swing.border.LineBorder;
 
 public class Juego extends JFrame implements ActionListener{
     
-    int totalElfos=0;
-    int totalHumanos=0;
-    int totalOrcos=0;
-    Personaje Pe,Ph,Po;
+    public int total,nElfos,nHumanos,nOrcos;
     
-    static JPanel jpan;
-    static int i=0;
+    private final JPanel jpan;
+    private int i=0;
     
-    JButton b1 = new JButton("Generar mapa");
-    JButton b2 = new JButton("Ingresar elfo");
-    JButton b3 = new JButton("Ingresar Humano");
-    JButton b4 = new JButton("Ingresar Orco");
-    JButton b5 = new JButton("Atacar");
+    private final JButton b1 = new JButton("Generar mapa");
+    private final JButton b2 = new JButton("Ingresar elfo");
+    private final JButton b3 = new JButton("Ingresar Humano");
+    private final JButton b4 = new JButton("Ingresar Orco");
+    private final JButton b5 = new JButton("Atacar");
     
-    JLabel matriz[][]=new JLabel[21][11];
-    JLabel muestraElfo[];
-    JLabel muestraHumano[];
-    JLabel muestraOrco[];
-    JLabel posX = new JLabel("posicion X:");
-    JLabel posY = new JLabel("posicion Y:");
-    static JLabel elfos = new JLabel("Elfos restantes: 10");
-    static JLabel humanos = new JLabel("Humanos restantes: 0");
-    static JLabel orco = new JLabel("Orcos restantes: 0");
-    static JLabel tropas[][]=new JLabel[20][10];
+    private final JLabel matriz[][]=new JLabel[21][11];
+    private final JLabel posX = new JLabel("posicion X:");
+    private final JLabel posY = new JLabel("posicion Y:");
+    private JLabel muestra[];
     
-    JTextField textoX=new JTextField();
-    JTextField textoY=new JTextField();
+    private Icon iconoElfo;
+    private Icon iconoHumano;
+    private Icon iconoOrco;
     
-    javax.swing.border.Border border = LineBorder.createBlackLineBorder();
+    private final JLabel elfos = new JLabel("Elfos restantes: 10");
+    private final JLabel humanos = new JLabel("Humanos restantes: 0");
+    private final JLabel orco = new JLabel("Orcos restantes: 0");
+    private final JLabel tropas[][]=new JLabel[20][10];
+    
+    private final JTextField textoX=new JTextField();
+    private final JTextField textoY=new JTextField();
+    
+    private final javax.swing.border.Border border = LineBorder.createBlackLineBorder();
     
     public void mostrar(){
         
-        Juego J=new Juego(totalElfos,totalHumanos,totalOrcos,Pe,Ph,Po);
+        Juego J=new Juego();
         J.setSize(1300,700);
         J.setVisible(true);
            
     }
     
-    public Juego(int totalElfos,int totalHumanos,int totalOrcos,Personaje Pe,Personaje Ph,Personaje Po){
-        
-        this.totalElfos=totalElfos;
-        this.totalHumanos=totalHumanos;
-        this.totalOrcos=totalOrcos;
-        this.Pe=Pe;
-        this.Ph=Ph;
-        this.Po=Po;
+    public Juego(){
         
         Container c=getContentPane();
         c.setLayout(null);
@@ -114,9 +106,10 @@ public class Juego extends JFrame implements ActionListener{
         c.add(orco);
         c.add(textoX);
         c.add(textoY);
+
     }
     
-    public static void correr(){
+    public void correr(){
         
         Timer timer=new Timer();
                 
@@ -151,7 +144,65 @@ public class Juego extends JFrame implements ActionListener{
         };
      
            timer.schedule(task, 1000, 500);
+           
+    }
+    
+    public void setTropas(int nElfos, int nHumanos, int nOrcos){
+        
+        this.nElfos=nElfos;
+        this.nHumanos=nHumanos;
+        this.nOrcos=nOrcos;
+        
+        System.out.println(nElfos);
+        System.out.println(nHumanos);
+        System.out.println(nOrcos);
+        
+    }
+    
+    public void setIconos(Icon iconoElfo,Icon iconoHumano,Icon iconoOrco){
+        
+        this.iconoElfo=iconoElfo;
+        this.iconoHumano=iconoHumano;
+        this.iconoOrco=iconoOrco;
+        
+    }
+    
+    public void crearMuestras(){
 
+        total=nElfos+nHumanos+nOrcos;
+        System.out.println(nElfos);
+        System.out.println(nHumanos);
+        System.out.println(nOrcos);
+        muestra=new JLabel[total];
+        
+        for(int k=0;k<total;k++){
+        
+            System.out.println(k);
+            
+            if(k<nElfos){
+                
+                muestra[k]=new JLabel();
+                muestra[k].setIcon(iconoElfo);
+                jpan.add(muestra[k]);
+                muestra[k].setBounds(50+(5*k), 550, 50, 50);
+                
+            } else if(k>=nElfos && k<(nElfos+nHumanos)) {
+             
+                muestra[k]=new JLabel();
+                muestra[k].setIcon(iconoHumano);
+                jpan.add(muestra[k]);
+                muestra[k].setBounds(450+(5*k), 550, 50, 50);
+                
+            } else if(k>=(nElfos+nHumanos) && k<(total)){
+               
+                muestra[k]=new JLabel();
+                muestra[k].setIcon(iconoOrco);
+                jpan.add(muestra[k]);
+                muestra[k].setBounds(850+(5*k), 550, 50, 50);
+                
+            }
+            
+        }
         
     }
     
@@ -160,86 +211,46 @@ public class Juego extends JFrame implements ActionListener{
         
         if(e.getSource()==b1){
             
-            muestraElfo=new JLabel[totalElfos];
-            muestraHumano=new JLabel[totalHumanos];
-            muestraOrco=new JLabel[totalOrcos];
-            
-            ImageIcon imgIcon1 = new ImageIcon(getClass().getResource("/Imagenes/"+Pe.getConjunto()+".png"));
-            Image imgEscalada1 = imgIcon1.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
-            Icon iconoEscalado1 = new ImageIcon(imgEscalada1);
-    
-            ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("/Imagenes/"+Ph.getConjunto()+".png"));
-            Image imgEscalada2 = imgIcon2.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
-            Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
-    
-            ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("/Imagenes/"+Po.getConjunto()+".png"));
-            Image imgEscalada3 = imgIcon3.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
-            Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
-            
-        for(int k=0;k<21;k++){
+            for(int k=0;k<21;k++){
                 
-            for(int j=0;j<11;j++){
+                for(int j=0;j<11;j++){
                     
-                if(k==0){
+                    if(k==0){
                     
-                    matriz[k][j]=new JLabel(String.valueOf(j));
-                    matriz[k][j].setBackground(Color.GRAY);
-                    matriz[k][j].setOpaque(true);
-                    matriz[k][j].setBorder(border);
-                    matriz[k][j].setHorizontalAlignment(SwingConstants.CENTER);
+                        matriz[k][j]=new JLabel(String.valueOf(j));
+                        matriz[k][j].setBackground(Color.GRAY);
+                        matriz[k][j].setOpaque(true);
+                        matriz[k][j].setBorder(border);
+                        matriz[k][j].setHorizontalAlignment(SwingConstants.CENTER);
                     
-                } else if(j==0){
+                    } else if(j==0){
                    
-                    matriz[k][j]=new JLabel(String.valueOf(k)); 
-                    matriz[k][j].setBackground(Color.GRAY);
-                    matriz[k][j].setOpaque(true);
-                    matriz[k][j].setBorder(border);
-                    matriz[k][j].setHorizontalAlignment(SwingConstants.CENTER);
+                        matriz[k][j]=new JLabel(String.valueOf(k)); 
+                        matriz[k][j].setBackground(Color.GRAY);
+                        matriz[k][j].setOpaque(true);
+                        matriz[k][j].setBorder(border);
+                        matriz[k][j].setHorizontalAlignment(SwingConstants.CENTER);
                     
-                } else {
+                    } else {
                 
-                    matriz[k][j]=new JLabel("");
-                    matriz[k][j].setBorder(border);
-                }
+                        matriz[k][j]=new JLabel("");
+                        matriz[k][j].setBorder(border);
+                    }
                 
                 jpan.add(matriz[k][j]);
                 matriz[k][j].setBounds(50*k, 50*j, 50, 50);
                 
-            }           
-        }
-        
-        for(int j=0;j<totalElfos;j++){
-                       
-            muestraElfo[j]=new JLabel();
-            muestraElfo[j].setIcon(iconoEscalado1);
-            jpan.add(muestraElfo[j]);
-            muestraElfo[j].setBounds(50+(5*j), 550, 50, 50);
+                }           
+            }
             
-        }
-        
-        for(int j=0;j<totalHumanos;j++){
+            crearMuestras();
             
-            muestraHumano[j]=new JLabel();
-            muestraHumano[j].setIcon(iconoEscalado2);
-            jpan.add(muestraHumano[j]);
-            muestraHumano[j].setBounds(450+(5*j), 550, 50, 50);
-            
-        }
-        
-        for(int j=0;j<totalOrcos;j++){
-            
-            muestraOrco[j]=new JLabel();
-            muestraOrco[j].setIcon(iconoEscalado3);
-            jpan.add(muestraOrco[j]);
-            muestraOrco[j].setBounds(850+(5*j), 550, 50, 50);
-            
-        }
         } else if(e.getSource()==b2){
             
             int x=Integer.parseInt(textoX.getText())-1;
             int y=Integer.parseInt(textoY.getText())-1;
             
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+Pe.getConjunto()+".png"));
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+"elfo2"+".png"));
             Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
             Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
             
@@ -248,8 +259,8 @@ public class Juego extends JFrame implements ActionListener{
             
             jpan.add(tropas[x][y]);
             tropas[x][y].setBounds(50+(50*x),50+(50*y),50,50);
-            jpan.remove(muestraElfo[totalElfos]);
-            totalElfos--;
+            jpan.remove(muestra[total]);
+            total--;
             jpan.repaint();
             
         } else if(e.getSource()==b5){
