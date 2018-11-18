@@ -2,13 +2,11 @@ package main;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,15 +35,17 @@ public class Juego extends JFrame implements ActionListener{
     private final JLabel matriz[][]=new JLabel[21][11];
     private final JLabel posX = new JLabel("posicion X:");
     private final JLabel posY = new JLabel("posicion Y:");
-    private JLabel muestra[];
+    private JLabel muestraElfos[];
+    private JLabel muestraHumanos[];
+    private JLabel muestraOrcos[];
     
     private Icon iconoElfo;
     private Icon iconoHumano;
     private Icon iconoOrco;
     
-    private final JLabel elfos = new JLabel("Elfos restantes: 10");
-    private final JLabel humanos = new JLabel("Humanos restantes: 0");
-    private final JLabel orco = new JLabel("Orcos restantes: 0");
+    private final JTextField elfos=new JTextField("");
+    private final JTextField humanos=new JTextField("");
+    private final JTextField orco=new JTextField("");
     private final JLabel tropas[][]=new JLabel[20][10];
     
     private final JTextField textoX=new JTextField();
@@ -91,10 +91,11 @@ public class Juego extends JFrame implements ActionListener{
         
         posX.setBounds(1100, 330, 100, 20);
         posY.setBounds(1100, 370, 100, 20);
-        elfos.setBounds(1100, 250, 200, 20);
-        humanos.setBounds(1100, 275, 200, 20);
-        orco.setBounds(1100, 300, 200, 20);
  
+        elfos.setBounds(1100, 250, 170, 20);
+        humanos.setBounds(1100, 275, 170, 20);
+        orco.setBounds(1100, 300, 170, 20);
+        
         textoX.setBounds(1170, 330, 20, 20);
         textoY.setBounds(1170, 370, 20, 20);
         
@@ -164,36 +165,43 @@ public class Juego extends JFrame implements ActionListener{
         this.total=catalogo.ntropas;
         
         
-        muestra=new JLabel[total];
+        muestraElfos=new JLabel[nElfos];
+        muestraHumanos=new JLabel[nHumanos];
+        muestraOrcos=new JLabel[nOrcos];
         
-        for(int k=0;k<total;k++){
-            
-            if(k<nElfos){
+        for(int k=0;k<nElfos;k++){
                 
-                muestra[k]=new JLabel();
-                muestra[k].setIcon(iconoElfo);
-                jpan.add(muestra[k]);
-                muestra[k].setBounds(50+(5*k), 550, 50, 50);
-                
-            } else if(k>=nElfos && k<(nElfos+nHumanos)) {
+                muestraElfos[k]=new JLabel();
+                muestraElfos[k].setIcon(iconoElfo);
+                jpan.add(muestraElfos[k]);
+                muestraElfos[k].setBounds(50+(5*k), 550, 50, 50);
              
-                muestra[k]=new JLabel();
-                muestra[k].setIcon(iconoHumano);
-                jpan.add(muestra[k]);
-                muestra[k].setBounds(400+(5*k), 550, 50, 50);
-                
-            } else if(k>=(nElfos+nHumanos) && k<(total)){
+        } for(int k=0;k<nHumanos;k++){
+            
+             
+                muestraHumanos[k]=new JLabel();
+                muestraHumanos[k].setIcon(iconoHumano);
+                jpan.add(muestraHumanos[k]);
+                muestraHumanos[k].setBounds(400+(5*k), 550, 50, 50);
+         
+        } for(int k=0;k<nOrcos;k++){
                
-                muestra[k]=new JLabel();
-                muestra[k].setIcon(iconoOrco);
-                jpan.add(muestra[k]);
-                muestra[k].setBounds(800+(5*k), 550, 50, 50);
+                muestraOrcos[k]=new JLabel();
+                muestraOrcos[k].setIcon(iconoOrco);
+                jpan.add(muestraOrcos[k]);
+                muestraOrcos[k].setBounds(800+(5*k), 550, 50, 50);
                 
             }
-            
-        }
         
         jpan.repaint();
+        
+    }
+    
+    public void contador(){
+        
+        elfos.setText("Elfos Restantes:" +nElfos);
+        humanos.setText("Elfos Restantes:" +nHumanos);
+        orco.setText("Elfos Restantes:" +nOrcos);
         
     }
     
@@ -207,7 +215,7 @@ public class Juego extends JFrame implements ActionListener{
                 for(int j=0;j<11;j++){
                     
                     if(k==0){
-                    
+                            
                         matriz[k][j]=new JLabel(String.valueOf(j));
                         matriz[k][j].setBackground(Color.GRAY);
                         matriz[k][j].setOpaque(true);
@@ -235,26 +243,56 @@ public class Juego extends JFrame implements ActionListener{
             }
   
             crearMuestras();
+            contador();
             
-        } else if(e.getSource()==b2){
+        } else if(e.getSource()==b2 && nElfos > 0){
             
             int x=Integer.parseInt(textoX.getText())-1;
             int y=Integer.parseInt(textoY.getText())-1;
             
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("/Imagenes/"+"elfo2"+".png"));
-            Image imgEscalada5 = imgIcon5.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
-            Icon iconoEscalado5 = new ImageIcon(imgEscalada5);
-            
             tropas[x][y]=new JLabel();
-            tropas[x][y].setIcon(iconoEscalado5);
+            tropas[x][y].setIcon(iconoElfo);
             
             jpan.add(tropas[x][y]);
             tropas[x][y].setBounds(50+(50*x),50+(50*y),50,50);
-            jpan.remove(muestra[total]);
-            total--;
+            jpan.remove(muestraElfos[nElfos-1]);
+            nElfos--;
             jpan.repaint();
+            contador();
             
-        } else if(e.getSource()==b5){
+        } else if(e.getSource()==b3 && nHumanos > 0){
+            
+            int x=Integer.parseInt(textoX.getText())-1;
+            int y=Integer.parseInt(textoY.getText())-1;
+            
+            tropas[x][y]=new JLabel();
+            tropas[x][y].setIcon(iconoHumano);
+            
+            jpan.add(tropas[x][y]);
+            tropas[x][y].setBounds(50+(50*x),50+(50*y),50,50);
+            jpan.remove(muestraHumanos[nHumanos-1]);
+            nHumanos--;
+            jpan.repaint();
+            contador();
+            
+        } else if(e.getSource()==b4 && nOrcos > 0){
+            
+            int x=Integer.parseInt(textoX.getText())-1;
+            int y=Integer.parseInt(textoY.getText())-1;
+            
+            tropas[x][y]=new JLabel();
+            tropas[x][y].setIcon(iconoOrco);
+            
+            jpan.add(tropas[x][y]);
+            tropas[x][y].setBounds(50+(50*x),50+(50*y),50,50);
+            jpan.remove(muestraOrcos[nOrcos-1]);
+            nOrcos--;
+            jpan.repaint();
+            contador();
+            
+        }
+        
+        else if(e.getSource()==b5){
             
             correr();
             
