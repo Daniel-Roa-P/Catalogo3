@@ -24,7 +24,7 @@ public class Juego extends JFrame implements ActionListener{
     private int nOrcos;
     
     private final JPanel jpan;
-    private int i=0;
+    private int indice=0;
     
     private final JButton b1 = new JButton("Generar mapa");
     private final JButton b2 = new JButton("Ingresar elfo");
@@ -46,7 +46,16 @@ public class Juego extends JFrame implements ActionListener{
     private final JTextField elfos=new JTextField("");
     private final JTextField humanos=new JTextField("");
     private final JTextField orco=new JTextField("");
-    private final JLabel tropas[][]=new JLabel[20][10];
+    private final JLabel [][] tropas={ {new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}
+                                      ,{new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")}};
     
     private final JTextField textoX=new JTextField();
     private final JTextField textoY=new JTextField();
@@ -62,8 +71,7 @@ public class Juego extends JFrame implements ActionListener{
     }
     
     public Juego(){
-        
-        
+       
         Container c=getContentPane();
         c.setLayout(null);
         this.getContentPane().setBackground(new Color(37,119,25));
@@ -126,22 +134,19 @@ public class Juego extends JFrame implements ActionListener{
             @Override
             public void run(){
                 
-                
-                for(int j=0;j<10;j++){
-                    
-                    if(tropas[i][j]!=null){
+                for(int i=9;i>0;i--){
+                    for(int j=19;j>0;j--){
                         
-                        tropas[i+1][j]=tropas[i][j];
-                        jpan.add(tropas[i+1][j]);
-                        tropas[i+1][j].setBounds(50+(50*i), 50+(50*j), 50, 50);
-
-                    
+                        tropas[i][j]=tropas[i-1][j];
+                        tropas[i][j].setBounds(50+(50*i), 50+(50*j), 50, 50);
+                        
                     }
-                    jpan.repaint();
-                }    
-                    
-                if(i<18){
-                    i++;
+                }
+                
+                jpan.repaint();
+                
+                if(indice<18){
+                    indice++;
                 } else {
                     timer.cancel();
                 }
@@ -149,6 +154,7 @@ public class Juego extends JFrame implements ActionListener{
             }
         };
      
+        
            timer.schedule(task, 1000, 500);
            
     }
@@ -200,8 +206,8 @@ public class Juego extends JFrame implements ActionListener{
     public void contador(){
         
         elfos.setText("Elfos Restantes:" +nElfos);
-        humanos.setText("Elfos Restantes:" +nHumanos);
-        orco.setText("Elfos Restantes:" +nOrcos);
+        humanos.setText("Humanos Restantes:" +nHumanos);
+        orco.setText("Orcos Restantes:" +nOrcos);
         
     }
     

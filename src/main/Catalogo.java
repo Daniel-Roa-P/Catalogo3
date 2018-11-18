@@ -56,9 +56,9 @@ public class Catalogo extends JFrame implements ActionListener {
         public Icon iconoHumano;
         public Icon iconoOrco;
 
-        private final JTextField cantidadElfos=new JTextField("10");
-        private final JTextField cantidadHumanos=new JTextField("10");
-        private final JTextField cantidadOrcos=new JTextField("10");
+        private final JTextField cantidadElfos=new JTextField("1");
+        private final JTextField cantidadHumanos=new JTextField("1");
+        private final JTextField cantidadOrcos=new JTextField("1");
         
         private final Director D=new Director();
         private Personaje P=new Personaje();
